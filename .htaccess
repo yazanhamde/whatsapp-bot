@@ -1,17 +1,14 @@
-# whatsapp-bot/.htaccess
+# منع أي كاش (متصفح أو سيرفر/CDN) لملفات الداشبورد الأساسية
+# حتى أي تعديل يظهر فوراً بدون ما تحتاجي تفرّغي كاش يدوياً
 
-RewriteEngine On
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|js|json)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>
 
-# تمرير Authorization header للـ PHP (لازم للـ API auth)
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-
-# منع الوصول لملف .env
-<Files ".env">
-    Order allow,deny
-    Deny from all
-</Files>
-
-# الملفات والمجلدات الموجودة تتصرف عادي
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+<IfModule mod_expires.c>
+    ExpiresActive Off
+</IfModule>
