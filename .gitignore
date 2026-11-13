@@ -1,0 +1,15 @@
+# Environment & secrets
+.env
+*.env
+
+# Uploaded media (user data)
+uploads/
+
+# PHP dependencies (install via composer)
+vendor/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

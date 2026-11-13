@@ -1,0 +1,10 @@
+# وجّه طلبات الصفحة الرئيسية لـ index.php عشان يحقن BUILD_TS ويكسر الكاش تلقائياً
+DirectoryIndex index.php index.html
+
+# منع التصفح المباشر للمجلدات
+Options -Indexes
+
+# ✅ الـ PWA (manifest start_url) بيفتح index.html مباشرة — وجّهه لـ index.php عشان BUILD_TS يتحقن
+# وإلا بيضل الرقم الثابت ?v=... والمتصفح بيعرض JS قديم للأبد
+RewriteEngine On
+RewriteRule ^index\.html$ index.php [L]

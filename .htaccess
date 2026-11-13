@@ -1,0 +1,17 @@
+# whatsapp-bot/.htaccess
+
+RewriteEngine On
+
+# تمرير Authorization header للـ PHP (لازم للـ API auth)
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# منع الوصول لملف .env
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# الملفات والمجلدات الموجودة تتصرف عادي
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
